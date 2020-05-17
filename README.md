@@ -2,7 +2,7 @@
 
 ## Source
 
-This template is based on the <a href="https://pages-themes.github.io/leap-day/">Leap Day</a> theme, by <a href="https://twitter.com/mattgraham">mattgraham</a>.
+This template is based on the [Leap Day](https://pages-themes.github.io/leap-day/) theme, by [mattgraham](https://twitter.com/mattgraham).
 
 ## Use
 
