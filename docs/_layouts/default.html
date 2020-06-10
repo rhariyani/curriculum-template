@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     {% seo %}
-    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ '/assets/image/favicon.ico' | relative_url }}">
     <script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
   <body>
 
       <header>
-        <h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+        <h1>{{ site.title | default: site.github.repository_name }} {%- if page.title -%}: {{ page.title }} {% endif %}</h1>
         <p>{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
       </header>
 
@@ -38,17 +38,32 @@
         <span id="logo"></span>
 
         {% unless site.github.private %}
-          <a href="{{ site.github.repository_url }}" class="button fork"><strong>View On GitHub</strong></a>
-          {% if site.show_downloads %}
-            <div class="downloads">
-              <span>Downloads:</span>
-              <ul>
-                <li><a href="{{ site.github.zip_url }}" class="button">ZIP</a></li>
-                <li><a href="{{ site.github.tar_url }}" class="button">TAR</a></li>
-              </ul>
-            </div>
-          {% endif %}
+          <div class="downloads">
+            <ul>
+              <li>
+                <a href="{{ site.github.repository_url }}" title="View repository on GitHub">
+                  <span class="fa-stack fa-lg" aria-hidden="true">
+                    <i class="fa fa-github fa-stack-2x"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
         {% endunless %}
+
+        {% if site.page_navigator.enabled %}
+          <div class="page-navigator">
+            <ul>
+              {%- assign navPages = site.pages | sort: 'order' -%}
+              {%- for navPage in navPages %}
+                {%- if navPage.menu -%}
+                  <li><a href="{{ navPage.url | relative_url }}" title="{{ navPage.title | escape }}">{{ navPage.menu }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {% endif %}
+
       </div><!-- end banner -->
 
     <div class="wrapper">
